@@ -7,7 +7,8 @@ use Mix.Config
 
 # General application configuration
 config :my_music,
-  ecto_repos: [MyMusic.Repo]
+  ecto_repos: [MyMusic.Repo],
+  albums_json: System.get_env("ALBUMS_JSON")
 
 # Configures the endpoint
 config :my_music, MyMusic.Web.Endpoint,
