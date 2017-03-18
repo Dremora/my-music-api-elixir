@@ -1,5 +1,6 @@
 defmodule MyMusic.Web.Router do
-  use MyMusic.Web, :router
+  use Phoenix.Router
+  import Phoenix.Controller
 
   pipeline :api do
     plug :accepts, ["json"]
