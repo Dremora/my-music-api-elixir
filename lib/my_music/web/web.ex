@@ -47,13 +47,6 @@ defmodule MyMusic.Web do
     end
   end
 
-  def channel do
-    quote do
-      use Phoenix.Channel
-      import MyMusic.Web.Gettext
-    end
-  end
-
   @doc """
   When used, dispatch to the appropriate controller/view/etc.
   """

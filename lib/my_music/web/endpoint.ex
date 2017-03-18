@@ -1,16 +1,6 @@
 defmodule MyMusic.Web.Endpoint do
   use Phoenix.Endpoint, otp_app: :my_music
 
-  socket "/socket", MyMusic.Web.UserSocket
-
-  # Serve at "/" the static files from "priv/static" directory.
-  #
-  # You should set gzip to true if you are running phoenix.digest
-  # when deploying your static files in production.
-  plug Plug.Static,
-    at: "/", from: :my_music, gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
-
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
@@ -21,11 +11,10 @@ defmodule MyMusic.Web.Endpoint do
   plug Plug.Logger
 
   plug Plug.Parsers,
-    parsers: [:urlencoded, :multipart, :json],
+    parsers: [:json],
     pass: ["*/*"],
     json_decoder: Poison
 
-  plug Plug.MethodOverride
   plug Plug.Head
 
   # The session will be stored in the cookie and signed,
