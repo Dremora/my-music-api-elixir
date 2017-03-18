@@ -21,7 +21,6 @@ defmodule MyMusic.Web do
       use Phoenix.Controller, namespace: MyMusic.Web
       import Plug.Conn
       import MyMusic.Web.Router.Helpers
-      import MyMusic.Web.Gettext
     end
   end
 
@@ -35,7 +34,6 @@ defmodule MyMusic.Web do
 
       import MyMusic.Web.Router.Helpers
       import MyMusic.Web.ErrorHelpers
-      import MyMusic.Web.Gettext
     end
   end
 
