@@ -1,8 +1,8 @@
-defmodule MyMusic.Source do
+defmodule MyMusic.Library.Source do
   use Ecto.Schema
   import Ecto.Changeset
 
-  schema "sources" do
+  schema "album_sources" do
     field :accurate_rip, :string
     field :comments, :string
     field :cue_issues, :string

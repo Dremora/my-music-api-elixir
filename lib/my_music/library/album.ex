@@ -1,6 +1,7 @@
-defmodule MyMusic.Album do
+defmodule MyMusic.Library.Album do
   use Ecto.Schema
   import Ecto.Changeset
+  alias MyMusic.Library.Source
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -11,7 +12,7 @@ defmodule MyMusic.Album do
     field :first_played_timestamp, :utc_datetime
     field :title, :string
     field :year, :integer
-    has_many :sources, MyMusic.Source
+    has_many :sources, Source
 
     timestamps()
   end

@@ -1,8 +1,8 @@
-defmodule MyMusic.Repo.Migrations.CreateMyMusic.Source do
+defmodule MyMusic.Repo.Migrations.CreateMyMusic.Library.Source do
   use Ecto.Migration
 
   def change do
-    create table(:sources) do
+    create table(:album_sources) do
       add :accurate_rip, :string
       add :comments, :string
       add :cue_issues, :string
@@ -18,6 +18,6 @@ defmodule MyMusic.Repo.Migrations.CreateMyMusic.Source do
       timestamps()
     end
 
-    create index(:sources, [:album_id])
+    create index(:album_sources, [:album_id])
   end
 end

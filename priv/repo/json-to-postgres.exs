@@ -2,7 +2,7 @@ alias Ecto.Multi
 alias Ecto.Changeset
 alias Ecto.UUID
 alias MyMusic.Repo
-alias MyMusic.Album
+alias MyMusic.Library.Album
 
 defmodule Main do
   def main do
@@ -22,7 +22,7 @@ defmodule Main do
 
   def album_cast(params) do
     changeset = Album.changeset(%Album{}, params)
-    { :ok, uuid } = UUID.load(Base.decode16!(params["_id"], case: :lower))
+    {:ok, uuid} = UUID.load(Base.decode16!(params["_id"], case: :lower))
     Changeset.cast(changeset, %{id: uuid}, [:id])
   end
 end
