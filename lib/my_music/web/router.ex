@@ -8,5 +8,7 @@ defmodule MyMusic.Web.Router do
 
   scope "/api", MyMusic.Web do
     pipe_through :api
+
+    resources "/albums", AlbumController, except: [:new, :edit]
   end
 end

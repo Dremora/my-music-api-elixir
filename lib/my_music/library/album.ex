@@ -1,6 +1,5 @@
 defmodule MyMusic.Library.Album do
   use Ecto.Schema
-  import Ecto.Changeset
   alias MyMusic.Library.Source
 
   @primary_key {:id, :binary_id, autogenerate: true}
@@ -15,27 +14,5 @@ defmodule MyMusic.Library.Album do
     has_many :sources, Source
 
     timestamps()
-  end
-
-  def changeset(data, params) do
-    changes = data
-    |> cast(params, [:artist, :title, :year, :comments])
-    |> cast_assoc(:sources)
-
-    if Map.has_key?(params, "first_played") do
-      cond do
-        is_list(params["first_played"]) ->
-          cast(changes, %{first_played_date: params["first_played"]},
-            [:first_played_date])
-        is_integer(params["first_played"]) ->
-          date = DateTime.from_unix!(params["first_played"], :millisecond)
-          cast(changes, %{first_played_timestamp: date},
-            [:first_played_timestamp])
-        true ->
-          changes
-      end
-    else
-      changes
-    end
   end
 end
