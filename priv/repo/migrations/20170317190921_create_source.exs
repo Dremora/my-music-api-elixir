@@ -13,7 +13,7 @@ defmodule MyMusic.Repo.Migrations.CreateMyMusic.Library.Source do
       add :location, :string
       add :mbid, :binary_id
       add :tag_issues, :string
-      add :album_id, references(:albums, on_delete: :nothing, type: :binary_id)
+      add :album_id, references(:albums, on_delete: :delete_all, type: :binary_id)
 
       timestamps()
     end
