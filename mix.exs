@@ -17,7 +17,7 @@ defmodule MyMusic.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {MyMusic.Application, []},
-     extra_applications: [:logger, :runtime_tools]]
+     extra_applications: [:logger, :runtime_tools, :tirexs]]
   end
 
   # Specifies which paths to compile per environment.
@@ -32,7 +32,8 @@ defmodule MyMusic.Mixfile do
      {:phoenix_ecto, "~> 3.2"},
      {:postgrex, ">= 0.0.0"},
      {:cowboy, "~> 1.0"},
-     {:credo, "~> 0.5", only: [:dev, :test]}]
+     {:credo, "~> 0.5", only: [:dev, :test]},
+     {:tirexs, "~> 0.8"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
@@ -42,9 +43,12 @@ defmodule MyMusic.Mixfile do
   #
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
-    ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"],
+    ["ecto.setup": ["ecto.create", "ecto.migrate", "elasticsearch.create", "elasticsearch.populate", "run priv/repo/seeds.exs"],
+     "ecto.reset": ["ecto.drop", "elasticsearch.drop", "ecto.setup"],
      "test": ["ecto.create --quiet", "ecto.migrate", "test"],
-     "json-to-postgres": "run priv/repo/json-to-postgres.exs"]
+     "json-to-postgres": "run priv/repo/json-to-postgres.exs",
+     "elasticsearch.create": "run priv/repo/elasticsearch/create.exs",
+     "elasticsearch.drop": "run priv/repo/elasticsearch/drop.exs",
+     "elasticsearch.populate": "run priv/repo/elasticsearch/populate.exs"]
   end
 end
