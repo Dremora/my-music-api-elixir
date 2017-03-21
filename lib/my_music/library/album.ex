@@ -11,7 +11,7 @@ defmodule MyMusic.Library.Album do
     field :first_played_timestamp, :utc_datetime
     field :title, :string
     field :year, :integer
-    has_many :sources, Source
+    has_many :sources, Source, on_replace: :delete
 
     timestamps()
   end
