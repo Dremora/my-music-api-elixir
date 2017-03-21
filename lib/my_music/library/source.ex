@@ -20,8 +20,8 @@ defmodule MyMusic.Library.Source do
   end
 
   def changeset(data, params) do
-    changes = data
-    |> cast(params, [:accurate_rip, :comments,
+    data
+    |> cast(params, [:accurate_rip, :comments, :mbid,
       :cue_issues, :discs, :download, :edition, :format, :location, :tag_issues
     ])
     |> validate_inclusion(:location, ~w(apple-music spotify google-music foobar2000))
@@ -34,16 +34,6 @@ defmodule MyMusic.Library.Source do
     |> validate_length(:download, max: 1000)
     |> validate_length(:edition, max: 255)
     |> validate_length(:tag_issues, max: 255)
-
-    if is_nil(params["mbid"]) do
-      put_change(changes, :mbid, nil)
-    else
-      case UUID.cast(params["mbid"]) do
-        :error ->
-          add_error(changes, :mbid, "is invalid")
-        {:ok, mbid} ->
-          put_change(changes, :mbid, String.downcase(mbid))
-      end
-    end
+    |> validate_format(:mbid, ~r/\A[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}\z/)
   end
 end
