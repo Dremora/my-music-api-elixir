@@ -8,6 +8,29 @@ defmodule MyMusic.Library do
     Repo.all(from a in Album, preload: :sources)
   end
 
+  def search(search_string) do
+    query = [
+      index: "music",
+      type: "album",
+      search: [
+        from: 0,
+        size: 50,
+        query: [
+          multi_match: [
+            query: search_string,
+            fields: ["artist", "title", "year"],
+            lenient: true,
+            type: "cross_fields",
+            operator: "and"
+          ]
+        ]
+      ]
+    ]
+    {:ok, 200, %{hits: %{hits: results}}} = Tirexs.Query.create_resource(query)
+    ids = Enum.map(results, &(&1._id))
+    Repo.all(from a in Album, where: a.id in ^ids, preload: :sources)
+  end
+
   def get_album!(id) do
     Repo.one from album in Album,
       where: album.id == ^id,

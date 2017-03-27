@@ -6,6 +6,11 @@ defmodule MyMusic.Web.AlbumController do
 
   action_fallback MyMusic.Web.FallbackController
 
+  def index(conn, %{"query" => query}) do
+    albums = Library.search(query)
+    render(conn, "index.json", albums: albums)
+  end
+
   def index(conn, _params) do
     albums = Library.list_albums()
     render(conn, "index.json", albums: albums)
