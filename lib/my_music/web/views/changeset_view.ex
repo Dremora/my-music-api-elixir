@@ -8,7 +8,7 @@ defmodule MyMusic.Web.ChangesetView do
   `MyMusic.Web.ErrorHelpers.translate_error/1` for more details.
   """
   def translate_errors(changeset) do
-    Ecto.Changeset.traverse_errors(changeset, fn {msg, opts} -> msg end)
+    Ecto.Changeset.traverse_errors(changeset, fn {msg, _} -> msg end)
   end
 
   def render("error.json", %{changeset: changeset}) do

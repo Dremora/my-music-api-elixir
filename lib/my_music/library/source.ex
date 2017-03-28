@@ -1,7 +1,6 @@
 defmodule MyMusic.Library.Source do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Ecto.UUID
 
   schema "album_sources" do
     field :accurate_rip, :string

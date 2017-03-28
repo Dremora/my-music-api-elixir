@@ -53,10 +53,6 @@ defmodule MyMusic.Library do
     Repo.delete(album)
   end
 
-  def change_album(%Album{} = album) do
-    album_changeset(album, %{})
-  end
-
   defp album_changeset(%Album{} = album, attrs) do
     changes = album
     |> cast(attrs, [:artist, :title, :year, :comments])
