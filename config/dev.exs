@@ -42,8 +42,8 @@ config :my_music, MyMusic.Repo,
   username: "postgres",
   password: "postgres",
   database: "my_music_dev",
-  hostname: "localhost",
+  hostname: "postgres",
   pool_size: 10
 
 # Elasticsearch
-config :tirexs, :uri, "http://elastic:changeme@127.0.0.1:9200"
+config :tirexs, :uri, "http://elastic:changeme@elasticsearch:9200"

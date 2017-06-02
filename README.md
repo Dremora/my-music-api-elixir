@@ -1,10 +1,17 @@
 # MyMusic
 
-To start your Phoenix server:
+To initialize database and ElasticSearch:
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  * Start Phoenix endpoint with `mix phx.server`
+`docker-compose run mix ecto.setup`
+`docker-compose run mix ecto.import`
+
+To migrate the database:
+
+`docker-compose run mix ecto.migrate`
+
+To start the web server:
+
+`docker-compose up`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
