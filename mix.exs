@@ -44,10 +44,9 @@ defmodule MyMusic.Mixfile do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "elasticsearch.create"],
-     "ecto.import": ["json-to-postgres", "run priv/repo/seeds.exs", "elasticsearch.populate"],
+     "ecto.import": ["run priv/repo/seeds.exs", "elasticsearch.populate"],
      "ecto.reset": ["ecto.drop", "elasticsearch.drop", "ecto.setup"],
      "test": ["ecto.create --quiet", "ecto.migrate", "test"],
-     "json-to-postgres": "run priv/repo/json-to-postgres.exs",
      "elasticsearch.create": "run priv/repo/elasticsearch/create.exs",
      "elasticsearch.drop": "run priv/repo/elasticsearch/drop.exs",
      "elasticsearch.populate": "run priv/repo/elasticsearch/populate.exs"]
