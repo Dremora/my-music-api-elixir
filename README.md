@@ -2,12 +2,12 @@
 
 To initialize database and ElasticSearch:
 
-`docker-compose run mix ecto.setup`
-`docker-compose run mix ecto.import`
+`docker-compose run web mix ecto.setup`
+`docker-compose run web mix ecto.import`
 
 To migrate the database:
 
-`docker-compose run mix ecto.migrate`
+`docker-compose run web mix ecto.migrate`
 
 To start the web server:
 
