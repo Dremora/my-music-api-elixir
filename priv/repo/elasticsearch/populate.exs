@@ -14,7 +14,7 @@ defmodule Main do
     payload = bulk([ index: "music", type: "album" ]) do
       index commands
     end
-    Tirexs.bump(payload)._bulk()
+    { :ok, 200, r } = Tirexs.bump(payload)._bulk()
   end
 end
 
