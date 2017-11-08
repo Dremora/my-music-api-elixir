@@ -1,17 +1,22 @@
 # MyMusic
 
-To initialize database and ElasticSearch:
+To start the app:
 
-`docker-compose run web mix ecto.setup`
-`docker-compose run web mix ecto.import`
+  * In a separate terminal, run postgres: `docker-compose up postgres`
+  * In a separate terminal, run ElasticSearch: `docker-compose up elastisearch`
+  * Install dependencies with `mix deps.get`
+  * Initialize the database and ElasticSearch: `mix ecto.setup`
+  * Import seed data: `mix ecto.import`
+  * Populate ElasticSearch: `mix elasticsearch.populate`
+  * Start Phoenix endpoint with `mix phx.server`
 
 To migrate the database:
 
-`docker-compose run web mix ecto.migrate`
+`mix ecto.migrate`
 
-To start the web server:
+To drop the database:
 
-`docker-compose up`
+`mix elasticsearch.drop && mix ecto.drop`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
