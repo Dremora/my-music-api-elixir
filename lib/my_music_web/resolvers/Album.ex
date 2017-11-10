@@ -6,7 +6,7 @@ defmodule MyMusicWeb.Resolvers.Album do
   end
 
   def find_one(_parent, %{id: id}, _info) do
-    case Library.get_album!(id) do
+    case Library.get_album(id) do
       nil  -> {:error, "Album id #{id} not found"}
       album -> {:ok, album}
     end
@@ -17,14 +17,10 @@ defmodule MyMusicWeb.Resolvers.Album do
   end
 
   def update(params, _info) do
-    # TODO What happens it the album doesn't exist?
-    album = Library.get_album!(params.id)
-    Library.update_album(album, params)
+    Library.update_album(params.id, params)
   end
 
   def delete(%{id: id}, _info) do
-    # TODO What happens it the album doesn't exist?
-    album = Library.get_album!(id)
-    Library.delete_album(album)
+    Library.delete_album(id)
   end
 end

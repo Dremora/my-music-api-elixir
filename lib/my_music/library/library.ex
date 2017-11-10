@@ -27,8 +27,8 @@ defmodule MyMusic.Library do
     Repo.all(from a in Album, where: a.id in ^ids, preload: :sources)
   end
 
-  def get_album!(id) do
-    Repo.get(Album, id, preload: :sources)
+  def get_album(id) do
+    Repo.get(Album, id)
   end
 
   def create_album(attrs \\ %{}) do
@@ -37,14 +37,24 @@ defmodule MyMusic.Library do
     |> Repo.insert()
   end
 
-  def update_album(%Album{} = album, attrs) do
-    album
-    |> album_changeset(attrs)
-    |> Repo.update()
+  def update_album(id, attrs) do
+    album = Album
+    |> Repo.get(id)
+    |> Repo.preload(:sources)
+    case album do
+      nil -> {:error, "Album not found"}
+      album ->
+        album
+        |> album_changeset(attrs)
+        |> Repo.update()
+    end
   end
 
-  def delete_album(%Album{} = album) do
-    Repo.delete(album)
+  def delete_album(id) do
+    case Repo.get(Album, id) do
+      nil -> {:error, "Album not found"}
+      album -> Repo.delete(album)
+    end
   end
 
   def album_changeset(%Album{} = album, attrs) do
