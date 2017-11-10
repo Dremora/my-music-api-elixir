@@ -15,8 +15,6 @@ defmodule MyMusicWeb.Endpoint do
     pass: ["*/*"],
     json_decoder: Poison
 
-  plug Plug.Head
-
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
@@ -25,7 +23,8 @@ defmodule MyMusicWeb.Endpoint do
     key: "_my_music_key",
     signing_salt: "rNDlIxMc"
 
-  plug MyMusicWeb.Router
+  plug Absinthe.Plug,
+    schema: MyMusicWeb.Schema
 
   @doc """
   Callback invoked for dynamically configuring the endpoint.

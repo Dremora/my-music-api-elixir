@@ -4,10 +4,6 @@ defmodule MyMusic.Library do
 
   alias MyMusic.Library.Album
 
-  def list_albums do
-    Repo.all(from a in Album, preload: :sources)
-  end
-
   def search(search_string) do
     query = [
       index: "music",
@@ -32,9 +28,7 @@ defmodule MyMusic.Library do
   end
 
   def get_album!(id) do
-    Repo.one from album in Album,
-      where: album.id == ^id,
-      preload: [:sources]
+    Repo.get(Album, id, preload: :sources)
   end
 
   def create_album(attrs \\ %{}) do

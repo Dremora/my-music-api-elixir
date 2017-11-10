@@ -17,7 +17,7 @@ defmodule MyMusic.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {MyMusic.Application, []},
-     extra_applications: [:logger, :runtime_tools, :tirexs]]
+     extra_applications: [:logger, :runtime_tools, :tirexs, :absinthe_plug]]
   end
 
   # Specifies which paths to compile per environment.
@@ -33,6 +33,8 @@ defmodule MyMusic.Mixfile do
      {:postgrex, ">= 0.13.3"},
      {:cowboy, "~> 1.0"},
      {:credo, "~> 0.8.8", only: [:dev, :test]},
+     {:absinthe, "~> 1.4.0-rc.3", override: true},
+     {:absinthe_plug, "~> 1.4.0-rc.2"},
      {:tirexs, "~> 0.8.15"}]
   end
 

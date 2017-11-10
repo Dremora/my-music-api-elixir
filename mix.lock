@@ -1,4 +1,6 @@
-%{"bunt": {:hex, :bunt, "0.2.0", "951c6e801e8b1d2cbe58ebbd3e616a869061ddadcc4863d0a2182541acae9a38", [:mix], []},
+%{"absinthe": {:hex, :absinthe, "1.4.0-rc.3", "6224f17dfc079fc0d9cd74d3524894c1c934c28374b889b8411f72b85ea183b8", [:mix], [{:dataloader, "~> 0.1.0", [hex: :dataloader, optional: true]}, {:decimal, "~> 1.0", [hex: :decimal, optional: true]}]},
+  "absinthe_plug": {:hex, :absinthe_plug, "1.4.0-rc.2", "a09f6f0aee579ab987699a91dd30441c0c95b5dc173e3dd1bef03ba2d35ebca5", [:mix], [{:absinthe, "~> 1.4.0-rc.3 or ~> 1.4", [hex: :absinthe, optional: false]}, {:plug, "~> 1.3.2 or ~> 1.4", [hex: :plug, optional: false]}]},
+  "bunt": {:hex, :bunt, "0.2.0", "951c6e801e8b1d2cbe58ebbd3e616a869061ddadcc4863d0a2182541acae9a38", [:mix], []},
   "connection": {:hex, :connection, "1.0.4", "a1cae72211f0eef17705aaededacac3eb30e6625b04a6117c1b2db6ace7d5976", [:mix], []},
   "cowboy": {:hex, :cowboy, "1.1.2", "61ac29ea970389a88eca5a65601460162d370a70018afe6f949a29dca91f3bb0", [:rebar3], [{:cowlib, "~> 1.0.2", [hex: :cowlib, optional: false]}, {:ranch, "~> 1.3.2", [hex: :ranch, optional: false]}]},
   "cowlib": {:hex, :cowlib, "1.0.2", "9d769a1d062c9c3ac753096f868ca121e2730b9a377de23dec0f7e08b1df84ee", [:make], []},
