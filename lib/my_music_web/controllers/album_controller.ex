@@ -1,10 +1,10 @@
-defmodule MyMusic.Web.AlbumController do
-  use MyMusic.Web, :controller
+defmodule MyMusicWeb.AlbumController do
+  use MyMusicWeb, :controller
 
   alias MyMusic.Library
   alias MyMusic.Library.Album
 
-  action_fallback MyMusic.Web.FallbackController
+  action_fallback MyMusicWeb.FallbackController
 
   def index(conn, %{"query" => query}) do
     albums = Library.search(query)

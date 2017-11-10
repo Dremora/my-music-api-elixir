@@ -1,4 +1,4 @@
-defmodule MyMusic.Web.Router do
+defmodule MyMusicWeb.Router do
   use Phoenix.Router
   import Phoenix.Controller
 
@@ -6,7 +6,7 @@ defmodule MyMusic.Web.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", MyMusic.Web do
+  scope "/api", MyMusicWeb do
     pipe_through :api
 
     resources "/albums", AlbumController, except: [:new, :edit]

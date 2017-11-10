@@ -1,5 +1,5 @@
-defmodule MyMusic.Web.ErrorView do
-  use MyMusic.Web, :view
+defmodule MyMusicWeb.ErrorView do
+  use MyMusicWeb, :view
 
   def render("404.json", _assigns) do
     %{errors: %{detail: "Page not found"}}

@@ -1,6 +1,6 @@
-defmodule MyMusic.Web.AlbumView do
-  use MyMusic.Web, :view
-  alias MyMusic.Web.AlbumView
+defmodule MyMusicWeb.AlbumView do
+  use MyMusicWeb, :view
+  alias MyMusicWeb.AlbumView
 
   def render("index.json", %{albums: albums}) do
     %{albums: render_many(albums, AlbumView, "album.json")}

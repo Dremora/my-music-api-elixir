@@ -1,4 +1,4 @@
-defmodule MyMusic.Web.ErrorHelpers do
+defmodule MyMusicWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for building error messages.
   """

@@ -28,12 +28,12 @@ defmodule MyMusic.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.3.0-rc"},
-     {:phoenix_ecto, "~> 3.2"},
-     {:postgrex, ">= 0.0.0"},
+    [{:phoenix, "~> 1.3.0"},
+     {:phoenix_ecto, "~> 3.3.0"},
+     {:postgrex, ">= 0.13.3"},
      {:cowboy, "~> 1.0"},
-     {:credo, "~> 0.5", only: [:dev, :test]},
-     {:tirexs, "~> 0.8"}]
+     {:credo, "~> 0.8.8", only: [:dev, :test]},
+     {:tirexs, "~> 0.8.15"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

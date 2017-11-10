@@ -11,10 +11,10 @@ config :my_music,
   albums_json: System.get_env("ALBUMS_JSON")
 
 # Configures the endpoint
-config :my_music, MyMusic.Web.Endpoint,
+config :my_music, MyMusicWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "hZDGGBx5ZmJ9vsEO58L4Y9+554PNRZ3Ges236hXyMRCd2XH2GMiX6yB9M3IxI60I",
-  render_errors: [view: MyMusic.Web.ErrorView, accepts: ~w(json)],
+  render_errors: [view: MyMusicWeb.ErrorView, accepts: ~w(json)],
   pubsub: [name: MyMusic.PubSub,
            adapter: Phoenix.PubSub.PG2]
 

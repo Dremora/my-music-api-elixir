@@ -1,20 +1,20 @@
-defmodule MyMusic.Web.FallbackController do
+defmodule MyMusicWeb.FallbackController do
   @moduledoc """
   Translates controller action results into valid `Plug.Conn` responses.
 
   See `Phoenix.Controller.action_fallback/1` for more details.
   """
-  use MyMusic.Web, :controller
+  use MyMusicWeb, :controller
 
   def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
     conn
     |> put_status(:unprocessable_entity)
-    |> render(MyMusic.Web.ChangesetView, "error.json", changeset: changeset)
+    |> render(MyMusicWeb.ChangesetView, "error.json", changeset: changeset)
   end
 
   def call(conn, {:error, :not_found}) do
     conn
     |> put_status(:not_found)
-    |> render(MyMusic.Web.ErrorView, :"404")
+    |> render(MyMusicWeb.ErrorView, :"404")
   end
 end
