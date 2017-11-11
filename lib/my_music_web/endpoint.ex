@@ -9,6 +9,7 @@ defmodule MyMusicWeb.Endpoint do
 
   plug Plug.RequestId
   plug Plug.Logger
+  plug CORSPlug
 
   plug Plug.Parsers,
     parsers: [:json],
