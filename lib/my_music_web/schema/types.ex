@@ -3,7 +3,7 @@ defmodule MyMusicWeb.Schema.Types do
   alias MyMusicWeb.Resolvers
 
   object :album do
-    field :id, non_null(:id)
+    field :id, non_null(:binary_id)
     field :title, non_null(:string)
     field :artist, non_null(:string)
     field :comments, :string
@@ -33,7 +33,7 @@ defmodule MyMusicWeb.Schema.Types do
     field :edition, :string
     field :format, :format
     field :location, non_null(:location)
-    field :mbid, :string
+    field :mbid, :binary_id
     field :tag_issues, :string
   end
 
@@ -72,7 +72,21 @@ defmodule MyMusicWeb.Schema.Types do
     field :edition, :string
     field :format, :string
     field :location, non_null(:location)
-    field :mbid, :string
+    field :mbid, :binary_id
     field :tag_issues, :string
+  end
+
+  scalar :binary_id do
+    serialize &(&1)
+    parse fn value ->
+      regex = ~r/\A[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}\z/
+      with %Absinthe.Blueprint.Input.String{value: value} <- value,
+           true <- String.match?(value, regex)
+      do
+        {:ok, value}
+      else
+        _ -> :error
+      end
+    end
   end
 end

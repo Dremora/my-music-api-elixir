@@ -13,7 +13,7 @@ defmodule MyMusicWeb.Schema do
     end
 
     field :album, :album do
-      arg :id, non_null(:id)
+      arg :id, non_null(:binary_id)
 
       resolve &Resolvers.Album.find_one/3
     end
@@ -33,7 +33,7 @@ defmodule MyMusicWeb.Schema do
     end
 
     field :update_album, type: :album do
-      arg :id, non_null(:id)
+      arg :id, non_null(:binary_id)
       arg :title, non_null(:string)
       arg :artist, non_null(:string)
       arg :comments, :string
@@ -45,7 +45,7 @@ defmodule MyMusicWeb.Schema do
     end
 
     field :delete_album, type: :album do
-      arg :id, non_null(:id)
+      arg :id, non_null(:binary_id)
 
       resolve &MyMusicWeb.Resolvers.Album.delete/2
     end
