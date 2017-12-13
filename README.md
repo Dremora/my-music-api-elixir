@@ -3,7 +3,7 @@
 To start the app:
 
   * In a separate terminal, run postgres: `docker-compose up postgres`
-  * In a separate terminal, run ElasticSearch: `docker-compose up elastisearch`
+  * In a separate terminal, run ElasticSearch: `docker-compose up elasticsearch`
   * Install dependencies with `mix deps.get`
   * Initialize the database and ElasticSearch: `mix ecto.setup`
   * Import seed data: `mix ecto.import`
