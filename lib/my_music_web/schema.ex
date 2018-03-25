@@ -9,13 +9,13 @@ defmodule MyMusicWeb.Schema do
     field :albums, list_of(:album) do
       arg :query, non_null(:string)
 
-      resolve &Resolvers.Album.find/3
+      resolve &Resolvers.Library.find_albums/3
     end
 
     field :album, :album do
       arg :id, non_null(:binary_id)
 
-      resolve &Resolvers.Album.find_one/3
+      resolve &Resolvers.Library.get_album/3
     end
   end
 
@@ -28,7 +28,7 @@ defmodule MyMusicWeb.Schema do
       arg :first_played, :first_played_time
       arg :sources, non_null(list_of(:source_input))
 
-      resolve &MyMusicWeb.Resolvers.Album.create/2
+      resolve &MyMusicWeb.Resolvers.Library.create_album/2
     end
 
     field :update_album, type: :album do
@@ -40,13 +40,13 @@ defmodule MyMusicWeb.Schema do
       arg :first_played, :first_played_time
       arg :sources, non_null(list_of(:source_input))
 
-      resolve &MyMusicWeb.Resolvers.Album.update/2
+      resolve &MyMusicWeb.Resolvers.Library.update_album/2
     end
 
     field :delete_album, type: :album do
       arg :id, non_null(:binary_id)
 
-      resolve &MyMusicWeb.Resolvers.Album.delete/2
+      resolve &MyMusicWeb.Resolvers.Library.delete_album/2
     end
   end
 end

@@ -25,7 +25,7 @@ defmodule MyMusicWeb.Schema.Types do
     end
 
     field :sources, non_null(list_of(:source)) do
-      resolve &Resolvers.Source.byAlbum/3
+      resolve &Resolvers.Library.sources_for_album/3
     end
   end
 
