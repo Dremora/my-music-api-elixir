@@ -20,8 +20,17 @@ defmodule MyMusic.Library.Source do
 
   def changeset(data, params) do
     data
-    |> cast(params, [:accurate_rip, :comments, :mbid,
-      :cue_issues, :discs, :download, :edition, :format, :location, :tag_issues
+    |> cast(params, [
+      :accurate_rip,
+      :comments,
+      :mbid,
+      :cue_issues,
+      :discs,
+      :download,
+      :edition,
+      :format,
+      :location,
+      :tag_issues
     ])
     |> validate_inclusion(:location, ~w(apple-music spotify google-music foobar2000))
     |> validate_required([:location])
@@ -33,6 +42,9 @@ defmodule MyMusic.Library.Source do
     |> validate_length(:download, max: 1000)
     |> validate_length(:edition, max: 255)
     |> validate_length(:tag_issues, max: 255)
-    |> validate_format(:mbid, ~r/\A[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}\z/)
+    |> validate_format(
+      :mbid,
+      ~r/\A[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}\z/
+    )
   end
 end

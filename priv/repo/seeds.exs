@@ -7,15 +7,16 @@ alias MyMusic.Library.Album
 
 defmodule Main do
   def main do
-    changesets = File.read!("priv/repo/seeds.json")
-    |> Poison.Parser.parse!
-    |> Map.get("rows")
-    |> Enum.map(&(Map.get(&1, "doc")))
-    |> Enum.map(&Main.album_cast/1)
+    changesets =
+      File.read!("priv/repo/seeds.json")
+      |> Poison.Parser.parse!()
+      |> Map.get("rows")
+      |> Enum.map(&Map.get(&1, "doc"))
+      |> Enum.map(&Main.album_cast/1)
 
     multi =
       changesets
-      |> Enum.reduce(Multi.new, fn(cset, multi) -> Multi.insert(multi, UUID.generate, cset) end)
+      |> Enum.reduce(Multi.new(), fn cset, multi -> Multi.insert(multi, UUID.generate(), cset) end)
 
     {:ok, _} = Repo.transaction(multi)
   end
@@ -27,4 +28,4 @@ defmodule Main do
   end
 end
 
-Main.main
+Main.main()

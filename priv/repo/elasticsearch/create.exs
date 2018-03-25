@@ -34,7 +34,8 @@ defmodule Main do
             },
             "folding" => %{
               "filter" => ["lowercase", "asciifolding"],
-              "tokenizer" => "standard", "type" => "custom"
+              "tokenizer" => "standard",
+              "type" => "custom"
             }
           },
           "filter" => %{
@@ -51,4 +52,4 @@ defmodule Main do
   end
 end
 
-Main.main
+Main.main()

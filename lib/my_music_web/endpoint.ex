@@ -24,8 +24,7 @@ defmodule MyMusicWeb.Endpoint do
     key: "_my_music_key",
     signing_salt: "rNDlIxMc"
 
-  plug Absinthe.Plug,
-    schema: MyMusicWeb.Schema
+  plug Absinthe.Plug, schema: MyMusicWeb.Schema
 
   @doc """
   Callback invoked for dynamically configuring the endpoint.

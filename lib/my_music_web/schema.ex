@@ -17,7 +17,6 @@ defmodule MyMusicWeb.Schema do
 
       resolve &Resolvers.Album.find_one/3
     end
-
   end
 
   mutation do

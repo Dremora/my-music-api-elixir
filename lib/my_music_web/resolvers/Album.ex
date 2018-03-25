@@ -7,7 +7,7 @@ defmodule MyMusicWeb.Resolvers.Album do
 
   def find_one(_parent, %{id: id}, _info) do
     case Library.get_album(id) do
-      nil  -> {:error, "Album id #{id} not found"}
+      nil -> {:error, "Album id #{id} not found"}
       album -> {:ok, album}
     end
   end

@@ -8,16 +8,22 @@ defmodule MyMusicWeb.Schema.Types do
     field :artist, non_null(:string)
     field :comments, :string
     field :year, :integer
+
     field :first_played, :first_played_time do
       resolve fn album, _args, _info ->
         cond do
           album.first_played_timestamp ->
-            {:ok , DateTime.to_unix(album.first_played_timestamp, :millisecond)}
-          album.first_played_date -> {:ok , album.first_played_date}
-          true -> {:ok , nil}
+            {:ok, DateTime.to_unix(album.first_played_timestamp, :millisecond)}
+
+          album.first_played_date ->
+            {:ok, album.first_played_date}
+
+          true ->
+            {:ok, nil}
         end
       end
     end
+
     field :sources, non_null(list_of(:source)) do
       resolve &Resolvers.Source.byAlbum/3
     end
@@ -38,11 +44,11 @@ defmodule MyMusicWeb.Schema.Types do
   end
 
   scalar :first_played_time do
-    parse fn(value) ->
+    parse fn value ->
       value
     end
 
-    serialize fn(value) ->
+    serialize fn value ->
       value
     end
   end
@@ -77,12 +83,13 @@ defmodule MyMusicWeb.Schema.Types do
   end
 
   scalar :binary_id do
-    serialize &(&1)
+    serialize & &1
+
     parse fn value ->
       regex = ~r/\A[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}\z/
+
       with %Absinthe.Blueprint.Input.String{value: value} <- value,
-           true <- String.match?(value, regex)
-      do
+           true <- String.match?(value, regex) do
         {:ok, value}
       else
         _ -> :error

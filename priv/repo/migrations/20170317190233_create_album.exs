@@ -13,6 +13,5 @@ defmodule MyMusic.Repo.Migrations.CreateMyMusic.Libary.Album do
 
       timestamps()
     end
-
   end
 end
