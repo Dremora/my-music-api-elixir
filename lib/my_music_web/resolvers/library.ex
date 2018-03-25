@@ -15,8 +15,8 @@ defmodule MyMusicWeb.Resolvers.Library do
 
   def create_album(params, _info) do
     case Library.create_album(params) do
-      {:error, _} ->
-        {:error, "Could not create album"}
+      {:error, changeset} ->
+        {:error, message: "Could not create album", details: error_details(changeset)}
 
       {:ok, _} = success ->
         success
@@ -25,12 +25,19 @@ defmodule MyMusicWeb.Resolvers.Library do
 
   def update_album(params, _info) do
     case Library.update_album(params.id, params) do
-      {:error, _} ->
-        {:error, "Could not update album"}
+      {:error, changeset} ->
+        {:error, message: "Could not update album", details: error_details(changeset)}
 
       {:ok, _} = success ->
         success
     end
+  end
+
+  def error_details(changeset) do
+    IO.inspect(changeset)
+
+    changeset
+    |> Ecto.Changeset.traverse_errors(fn {msg, _} -> msg end)
   end
 
   def delete_album(%{id: id}, _info) do
