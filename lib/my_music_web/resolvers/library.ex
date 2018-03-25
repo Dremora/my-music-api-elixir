@@ -14,11 +14,23 @@ defmodule MyMusicWeb.Resolvers.Library do
   end
 
   def create_album(params, _info) do
-    Library.create_album(params)
+    case Library.create_album(params) do
+      {:error, _} ->
+        {:error, "Could not create album"}
+
+      {:ok, _} = success ->
+        success
+    end
   end
 
   def update_album(params, _info) do
-    Library.update_album(params.id, params)
+    case Library.update_album(params.id, params) do
+      {:error, _} ->
+        {:error, "Could not update album"}
+
+      {:ok, _} = success ->
+        success
+    end
   end
 
   def delete_album(%{id: id}, _info) do
