@@ -3,7 +3,7 @@ defmodule MyMusicWeb.Resolvers.Library do
   alias MyMusic.Repo
 
   def find_albums(_parent, %{query: query}, _info) do
-    {:ok, Library.search(query)}
+    {:ok, Library.find_albums(query)}
   end
 
   def get_album(_parent, %{id: id}, _info) do

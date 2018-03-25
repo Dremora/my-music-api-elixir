@@ -9,7 +9,7 @@ defmodule MyMusic.Library do
     Repo.all(from a in Album, preload: :sources)
   end
 
-  def search(search_string) do
+  def find_albums(search_string) do
     query = [
       index: "music",
       type: "album",
