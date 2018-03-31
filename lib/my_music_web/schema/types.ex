@@ -1,6 +1,8 @@
 defmodule MyMusicWeb.Schema.Types do
   use Absinthe.Schema.Notation
+
   alias MyMusicWeb.Resolvers
+  alias MyMusicWeb.Schema.Middleware
 
   object :album do
     field :id, non_null(:binary_id)
@@ -35,7 +37,12 @@ defmodule MyMusicWeb.Schema.Types do
     field :comments, :string
     field :cue_issues, :string
     field :discs, :integer
-    field :download, :string
+
+    field :download, :string do
+      middleware Middleware.Authorize
+      middleware Absinthe.Middleware.MapGet, :download
+    end
+
     field :edition, :string
     field :format, :format
     field :location, non_null(:location)

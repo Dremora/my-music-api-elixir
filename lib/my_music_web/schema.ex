@@ -2,6 +2,7 @@ defmodule MyMusicWeb.Schema do
   use Absinthe.Schema
 
   alias MyMusicWeb.Resolvers
+  alias MyMusicWeb.Schema.Middleware
 
   import_types MyMusicWeb.Schema.Types
 
@@ -34,6 +35,7 @@ defmodule MyMusicWeb.Schema do
       arg :first_played, :first_played_time
       arg :sources, non_null(list_of(:source_input))
 
+      middleware Middleware.Authorize
       resolve &MyMusicWeb.Resolvers.Library.create_album/2
     end
 
@@ -46,12 +48,14 @@ defmodule MyMusicWeb.Schema do
       arg :first_played, :first_played_time
       arg :sources, non_null(list_of(:source_input))
 
+      middleware Middleware.Authorize
       resolve &MyMusicWeb.Resolvers.Library.update_album/2
     end
 
     field :delete_album, type: :album do
       arg :id, non_null(:binary_id)
 
+      middleware Middleware.Authorize
       resolve &MyMusicWeb.Resolvers.Library.delete_album/2
     end
   end

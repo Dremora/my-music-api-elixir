@@ -24,6 +24,8 @@ defmodule MyMusicWeb.Endpoint do
     key: "_my_music_key",
     signing_salt: "rNDlIxMc"
 
+  plug MyMusicWeb.Context
+
   plug Absinthe.Plug, schema: MyMusicWeb.Schema
 
   @doc """
