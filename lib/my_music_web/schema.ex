@@ -20,6 +20,12 @@ defmodule MyMusicWeb.Schema do
   end
 
   mutation do
+    field :login, type: :boolean do
+      arg :password, non_null(:string)
+
+      resolve &MyMusicWeb.Resolvers.Account.login/2
+    end
+
     field :create_album, type: :album do
       arg :title, non_null(:string)
       arg :artist, non_null(:string)
