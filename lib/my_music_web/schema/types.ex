@@ -76,7 +76,21 @@ defmodule MyMusicWeb.Schema.Types do
     value :ape, as: "APE"
   end
 
+  input_object :new_source_input do
+    field :accurate_rip, :string
+    field :comments, :string
+    field :cue_issues, :string
+    field :discs, :integer
+    field :download, :string
+    field :edition, :string
+    field :format, :string
+    field :location, non_null(:location)
+    field :mbid, :binary_id
+    field :tag_issues, :string
+  end
+
   input_object :source_input do
+    field :id, :id
     field :accurate_rip, :string
     field :comments, :string
     field :cue_issues, :string

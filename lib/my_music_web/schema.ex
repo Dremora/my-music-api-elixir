@@ -33,7 +33,7 @@ defmodule MyMusicWeb.Schema do
       arg :comments, :string
       arg :year, :integer
       arg :first_played, :first_played_time
-      arg :sources, non_null(list_of(:source_input))
+      arg :sources, non_null(list_of(:new_source_input))
 
       middleware Middleware.Authorize
       resolve &MyMusicWeb.Resolvers.Library.create_album/2
