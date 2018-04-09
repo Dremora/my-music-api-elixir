@@ -1,7 +1,9 @@
 defmodule MyMusicWeb.Schema.Types do
   use Absinthe.Schema.Notation
 
-  alias MyMusicWeb.Resolvers
+  import Absinthe.Resolution.Helpers, only: [dataloader: 1]
+
+  alias MyMusic.Library
   alias MyMusicWeb.Schema.Middleware
 
   object :album do
@@ -27,7 +29,7 @@ defmodule MyMusicWeb.Schema.Types do
     end
 
     field :sources, non_null(list_of(:source)) do
-      resolve &Resolvers.Library.sources_for_album/3
+      resolve dataloader(Library)
     end
   end
 

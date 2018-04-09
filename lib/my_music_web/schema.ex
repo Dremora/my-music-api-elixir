@@ -4,6 +4,21 @@ defmodule MyMusicWeb.Schema do
   alias MyMusicWeb.Resolvers
   alias MyMusicWeb.Schema.Middleware
 
+  def plugins do
+    [Absinthe.Middleware.Dataloader | Absinthe.Plugin.defaults()]
+  end
+
+  def dataloader() do
+    alias MyMusic.Library
+
+    Dataloader.new()
+    |> Dataloader.add_source(Library, Library.data())
+  end
+
+  def context(ctx) do
+    Map.put(ctx, :loader, dataloader())
+  end
+
   import_types MyMusicWeb.Schema.Types
 
   query do

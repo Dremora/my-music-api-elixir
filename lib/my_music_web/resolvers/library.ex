@@ -1,6 +1,5 @@
 defmodule MyMusicWeb.Resolvers.Library do
   alias MyMusic.Library
-  alias MyMusic.Repo
 
   def find_albums(_parent, %{query: query}, _info) do
     {:ok, Library.find_albums(query)}
@@ -42,10 +41,5 @@ defmodule MyMusicWeb.Resolvers.Library do
 
   def delete_album(%{id: id}, _info) do
     Library.delete_album(id)
-  end
-
-  def sources_for_album(album, _, _) do
-    query = Ecto.assoc(album, :sources)
-    {:ok, Repo.all(query)}
   end
 end

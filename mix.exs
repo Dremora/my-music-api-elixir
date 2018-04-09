@@ -41,6 +41,7 @@ defmodule MyMusic.Mixfile do
       {:credo, "~> 0.9.0", only: [:dev, :test]},
       {:absinthe, "~> 1.4.9"},
       {:absinthe_plug, "~> 1.4.2"},
+      {:dataloader, "~> 1.0.1"},
       {:tirexs, "~> 0.8.15"}
     ]
   end

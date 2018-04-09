@@ -5,8 +5,16 @@ defmodule MyMusic.Library do
 
   alias MyMusic.Library.Album
 
+  def data do
+    Dataloader.Ecto.new(Repo, query: &query/2)
+  end
+
+  def query(queryable, _) do
+    queryable
+  end
+
   def list_albums do
-    Repo.all(from a in Album, preload: :sources)
+    Repo.all(from(a in Album))
   end
 
   def find_albums(search_string) do
@@ -30,7 +38,7 @@ defmodule MyMusic.Library do
 
     {:ok, 200, %{hits: %{hits: results}}} = Tirexs.Query.create_resource(query)
     ids = Enum.map(results, & &1._id)
-    Repo.all(from a in Album, where: a.id in ^ids, preload: :sources)
+    Repo.all(from a in Album, where: a.id in ^ids)
   end
 
   def get_album(id) do
