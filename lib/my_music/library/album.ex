@@ -44,6 +44,11 @@ defmodule MyMusic.Library.Album do
           |> put_change(:first_played_date, nil)
           |> cast(%{first_played_timestamp: date}, [:first_played_timestamp])
 
+        is_nil(attrs["first_played"]) ->
+          changes
+          |> put_change(:first_played_date, nil)
+          |> put_change(:first_played_timestamp, nil)
+
         true ->
           add_error(changes, :first_played, "is invalid")
       end
