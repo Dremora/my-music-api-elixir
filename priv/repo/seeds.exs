@@ -2,7 +2,6 @@ alias Ecto.Multi
 alias Ecto.Changeset
 alias Ecto.UUID
 alias MyMusic.Repo
-alias MyMusic.Library
 alias MyMusic.Library.Album
 
 defmodule Main do
@@ -12,6 +11,7 @@ defmodule Main do
       |> Poison.Parser.parse!()
       |> Map.get("rows")
       |> Enum.map(&Map.get(&1, "doc"))
+      |> Enum.filter(&(Map.get(&1, "_id") != "_design/rest"))
       |> Enum.map(&Main.album_cast/1)
 
     multi =
@@ -22,7 +22,7 @@ defmodule Main do
   end
 
   def album_cast(params) do
-    changeset = Library.album_changeset(%Album{}, params)
+    changeset = Album.changeset(%Album{}, params)
     {:ok, uuid} = UUID.load(Base.decode16!(params["_id"], case: :lower))
     Changeset.cast(changeset, %{id: uuid}, [:id])
   end
