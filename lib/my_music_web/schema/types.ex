@@ -111,11 +111,19 @@ defmodule MyMusicWeb.Schema.Types do
     parse fn value ->
       regex = ~r/\A[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}\z/
 
-      with %Absinthe.Blueprint.Input.String{value: value} <- value,
-           true <- String.match?(value, regex) do
-        {:ok, value}
-      else
-        _ -> :error
+      case value do
+        %Absinthe.Blueprint.Input.Null{} ->
+          {:ok, nil}
+
+        %Absinthe.Blueprint.Input.String{value: value} ->
+          with true <- String.match?(value, regex) do
+            {:ok, value}
+          else
+            _ -> :error
+          end
+
+        _ ->
+          :error
       end
     end
   end
