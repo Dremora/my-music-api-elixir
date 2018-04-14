@@ -4,11 +4,11 @@ defmodule MyMusic.Repo.Migrations.CreateMyMusic.Libary.Album do
   def change do
     create table(:albums, primary_key: false) do
       add :id, :binary_id, primary_key: true
-      add :artist, :string
+      add :artist, :string, null: false
       add :comments, :string
       add :first_played_timestamp, :utc_datetime
       add :first_played_date, {:array, :integer}
-      add :title, :string
+      add :title, :string, null: false
       add :year, :integer
 
       timestamps()

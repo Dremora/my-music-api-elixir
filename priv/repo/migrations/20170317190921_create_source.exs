@@ -10,10 +10,10 @@ defmodule MyMusic.Repo.Migrations.CreateMyMusic.Library.Source do
       add :download, :string, size: 1000
       add :edition, :string
       add :format, :string
-      add :location, :string
+      add :location, :string, null: false
       add :mbid, :binary_id
       add :tag_issues, :string
-      add :album_id, references(:albums, on_delete: :delete_all, type: :binary_id)
+      add :album_id, references(:albums, on_delete: :delete_all, type: :binary_id), null: false
 
       timestamps()
     end
