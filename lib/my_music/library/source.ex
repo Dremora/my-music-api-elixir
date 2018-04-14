@@ -34,7 +34,7 @@ defmodule MyMusic.Library.Source do
     ])
     |> validate_inclusion(:location, ~w(apple-music spotify google-music foobar2000))
     |> validate_required([:location])
-    |> validate_inclusion(:format, ~w(TAK Mixed MPC FLAC MP3 APE OFT WMA))
+    |> validate_inclusion(:format, ~w(TAK MIXED MPC FLAC MP3 APE OFT WMA))
     |> validate_inclusion(:discs, 1..100)
     |> validate_length(:accurate_rip, max: 255)
     |> validate_length(:comments, max: 255)

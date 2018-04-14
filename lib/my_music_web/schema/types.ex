@@ -71,7 +71,7 @@ defmodule MyMusicWeb.Schema.Types do
 
   enum :format do
     value :tak, as: "TAK"
-    value :mixed, as: "Mixed"
+    value :mixed, as: "MIXED"
     value :mpc, as: "MPC"
     value :flac, as: "FLAC"
     value :mp3, as: "MP3"
