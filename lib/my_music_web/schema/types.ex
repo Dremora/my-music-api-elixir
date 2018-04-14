@@ -76,6 +76,8 @@ defmodule MyMusicWeb.Schema.Types do
     value :flac, as: "FLAC"
     value :mp3, as: "MP3"
     value :ape, as: "APE"
+    value :oft, as: "OFT"
+    value :wma, as: "WMA"
   end
 
   input_object :new_source_input do
