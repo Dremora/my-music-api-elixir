@@ -4,9 +4,14 @@ defmodule MyMusic.Library do
   alias MyMusic.Repo
 
   alias MyMusic.Library.Album
+  alias MyMusic.Library.Source
 
   def data do
     Dataloader.Ecto.new(Repo, query: &query/2)
+  end
+
+  def query(Source, _) do
+    Source |> order_by(:id)
   end
 
   def query(queryable, _) do
