@@ -81,7 +81,7 @@ defmodule MyMusic.Library do
     album =
       Album
       |> Repo.get(id)
-      |> Repo.preload(:sources)
+      |> Repo.preload(sources: from(s in Source, order_by: s.id))
 
     case album do
       nil ->
