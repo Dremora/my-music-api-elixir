@@ -1,6 +1,7 @@
 defmodule MyMusic.Library.Source do
   use Ecto.Schema
   import Ecto.Changeset
+  import MyMusic.Helpers
 
   schema "album_sources" do
     field :accurate_rip, :string
@@ -30,6 +31,15 @@ defmodule MyMusic.Library.Source do
       :edition,
       :format,
       :location,
+      :tag_issues
+    ])
+    |> trim_fields([
+      :accurate_rip,
+      :comments,
+      :mbid,
+      :cue_issues,
+      :download,
+      :edition,
       :tag_issues
     ])
     |> validate_inclusion(:location, ~w(apple-music spotify google-music foobar2000))

@@ -1,6 +1,7 @@
 defmodule MyMusic.Library.Album do
   use Ecto.Schema
   import Ecto.Changeset
+  import MyMusic.Helpers
   alias MyMusic.Library.Album
   alias MyMusic.Library.Source
 
@@ -23,6 +24,7 @@ defmodule MyMusic.Library.Album do
       album
       |> cast(attrs, [:artist, :title, :year, :comments])
       |> cast_assoc(:sources)
+      |> trim_fields([:artist, :title, :comments])
       |> validate_required([:artist, :title])
       |> validate_length(:artist, max: 255)
       |> validate_length(:title, max: 255)
