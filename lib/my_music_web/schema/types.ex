@@ -28,7 +28,7 @@ defmodule MyMusicWeb.Schema.Types do
       end
     end
 
-    field :sources, non_null(list_of(:source)) do
+    field :sources, non_null(list_of(non_null(:source))) do
       resolve dataloader(Library)
     end
   end

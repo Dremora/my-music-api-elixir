@@ -22,7 +22,7 @@ defmodule MyMusicWeb.Schema do
   import_types MyMusicWeb.Schema.Types
 
   query do
-    field :albums, list_of(:album) do
+    field :albums, list_of(non_null(:album)) do
       arg :query, non_null(:string)
 
       resolve &Resolvers.Library.find_albums/3
@@ -48,7 +48,7 @@ defmodule MyMusicWeb.Schema do
       arg :comments, :string
       arg :year, :integer
       arg :first_played, :first_played_time
-      arg :sources, non_null(list_of(:new_source_input))
+      arg :sources, non_null(list_of(non_null(:new_source_input)))
 
       middleware Middleware.Authorize
       resolve &MyMusicWeb.Resolvers.Library.create_album/2
@@ -61,7 +61,7 @@ defmodule MyMusicWeb.Schema do
       arg :comments, :string
       arg :year, :integer
       arg :first_played, :first_played_time
-      arg :sources, non_null(list_of(:source_input))
+      arg :sources, non_null(list_of(non_null(:source_input)))
 
       middleware Middleware.Authorize
       resolve &MyMusicWeb.Resolvers.Library.update_album/2
