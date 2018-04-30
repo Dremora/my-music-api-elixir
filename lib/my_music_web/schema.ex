@@ -47,7 +47,7 @@ defmodule MyMusicWeb.Schema do
       arg :artist, non_null(:string)
       arg :comments, :string
       arg :year, :integer
-      arg :first_played, :first_played_time
+      arg :first_played, :first_played_input
       arg :sources, non_null(list_of(non_null(:new_source_input)))
 
       middleware Middleware.Authorize
@@ -60,7 +60,7 @@ defmodule MyMusicWeb.Schema do
       arg :artist, non_null(:string)
       arg :comments, :string
       arg :year, :integer
-      arg :first_played, :first_played_time
+      arg :first_played, :first_played_input
       arg :sources, non_null(list_of(non_null(:source_input)))
 
       middleware Middleware.Authorize

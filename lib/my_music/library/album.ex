@@ -31,22 +31,28 @@ defmodule MyMusic.Library.Album do
       |> validate_length(:comments, max: 255)
       |> validate_inclusion(:year, 1900..2100)
 
-    if Map.has_key?(attrs, "first_played") do
+    if Map.has_key?(attrs, :first_played) do
       cond do
-        is_list(attrs["first_played"]) ->
+        is_map(attrs.first_played) && Map.has_key?(attrs.first_played, :year) ->
+          date = [
+            Map.get(attrs.first_played, :year),
+            Map.get(attrs.first_played, :month),
+            Map.get(attrs.first_played, :day)
+          ]
+
           changes
           |> put_change(:first_played_timestamp, nil)
-          |> cast(%{first_played_date: attrs["first_played"]}, [:first_played_date])
+          |> cast(%{first_played_date: date}, [:first_played_date])
           |> validate_length(:first_played_date, min: 1, max: 3)
 
-        is_integer(attrs["first_played"]) ->
-          date = DateTime.from_unix!(attrs["first_played"], :millisecond)
+        is_map(attrs.first_played) && Map.has_key?(attrs.first_played, :timestamp) ->
+          date = DateTime.from_unix!(attrs.first_played.timestamp, :millisecond)
 
           changes
           |> put_change(:first_played_date, nil)
           |> cast(%{first_played_timestamp: date}, [:first_played_timestamp])
 
-        is_nil(attrs["first_played"]) ->
+        is_nil(attrs.first_played) ->
           changes
           |> put_change(:first_played_date, nil)
           |> put_change(:first_played_timestamp, nil)

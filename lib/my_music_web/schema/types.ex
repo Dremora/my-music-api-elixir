@@ -13,14 +13,19 @@ defmodule MyMusicWeb.Schema.Types do
     field :comments, :string
     field :year, :integer
 
-    field :first_played, :first_played_time do
+    field :first_played, :first_played do
       resolve fn album, _args, _info ->
         cond do
           album.first_played_timestamp ->
-            {:ok, DateTime.to_unix(album.first_played_timestamp, :millisecond)}
+            {:ok, %{timestamp: DateTime.to_unix(album.first_played_timestamp, :millisecond)}}
 
           album.first_played_date ->
-            {:ok, album.first_played_date}
+            {:ok,
+             %{
+               year: Enum.at(album.first_played_date, 0),
+               month: Enum.at(album.first_played_date, 1),
+               day: Enum.at(album.first_played_date, 2)
+             }}
 
           true ->
             {:ok, nil}
@@ -52,14 +57,30 @@ defmodule MyMusicWeb.Schema.Types do
     field :tag_issues, :string
   end
 
-  scalar :first_played_time do
-    parse fn value ->
-      value
-    end
+  object :first_played_date do
+    field :year, non_null(:integer)
+    field :month, :integer
+    field :day, :integer
+  end
 
-    serialize fn value ->
-      value
+  object :first_played_time do
+    field :timestamp, non_null(:integer)
+  end
+
+  union :first_played do
+    types [:first_played_date, :first_played_time]
+
+    resolve_type fn
+      %{timestamp: _}, _ -> :first_played_time
+      _, _ -> :first_played_date
     end
+  end
+
+  input_object :first_played_input do
+    field :year, :integer
+    field :month, :integer
+    field :day, :integer
+    field :timestamp, :integer
   end
 
   enum :location do
