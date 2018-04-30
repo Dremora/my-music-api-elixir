@@ -38,14 +38,9 @@ defmodule MyMusicWeb.Endpoint do
     if config[:load_from_system_env] do
       port = System.get_env("PORT") || raise "expected the PORT environment variable to be set"
 
-      user_password =
-        System.get_env("USER_PASSWORD") ||
-          raise "expected the USER_PASSWORD environment variable to be set"
-
       {:ok,
        config
-       |> Keyword.put(:http, [:inet6, port: port])
-       |> Keyword.put(:user_password, user_password)}
+       |> Keyword.put(:http, [:inet6, port: port])}
     else
       {:ok, config}
     end
