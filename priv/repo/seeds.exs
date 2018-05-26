@@ -23,8 +23,7 @@ defmodule Main do
 
   def album_cast(params) do
     changeset = Album.changeset(%Album{}, params)
-    {:ok, uuid} = UUID.load(Base.decode16!(params["_id"], case: :lower))
-    Changeset.cast(changeset, %{id: uuid}, [:id])
+    Changeset.cast(changeset, %{id: UUID.generate()}, [:id])
   end
 end
 
