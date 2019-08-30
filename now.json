@@ -1,11 +1,6 @@
 {
   "name": "my-music-api",
   "alias": "my-music-api.dremora.com",
-  "files": [
-    "config",
-    "config/prod.secret.exs",
-    "lib",
-    "mix.exs",
-    "mix.lock"
-  ]
+  "version": 1,
+  "files": ["config", "config/prod.secret.exs", "lib", "mix.exs", "mix.lock"]
 }
