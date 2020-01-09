@@ -18,7 +18,7 @@ defmodule Main do
         index(commands)
       end
 
-    {:ok, 200, r} = Tirexs.bump(payload)._bulk()
+    {:ok, 200, _} = Tirexs.bump(payload)._bulk()
   end
 end
 
