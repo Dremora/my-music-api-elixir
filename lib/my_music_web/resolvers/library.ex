@@ -5,6 +5,10 @@ defmodule MyMusicWeb.Resolvers.Library do
     {:ok, Library.find_albums(query)}
   end
 
+  def find_album_per_year_count(_parent, _query, _info) do
+    {:ok, Library.find_album_per_year_count}
+  end
+
   def get_album(_parent, %{id: id}, _info) do
     case Library.get_album(id) do
       nil -> {:error, "Album id #{id} not found"}
@@ -12,7 +16,7 @@ defmodule MyMusicWeb.Resolvers.Library do
     end
   end
 
-  def create_album(params, _info) do
+  def create_album( params, _info) do
     case Library.create_album(params) do
       {:error, changeset} ->
         {:error, message: "Could not create album", details: error_details(changeset)}

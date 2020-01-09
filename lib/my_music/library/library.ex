@@ -22,6 +22,28 @@ defmodule MyMusic.Library do
     Repo.all(from(a in Album))
   end
 
+  def find_album_per_year_count do
+    query = [
+      size: 0,
+      aggs: [
+        year_count: [
+          terms: [
+            field: "year",
+            size: 200,
+            missing: 0
+          ]
+        ]
+      ]
+    ]
+
+    result = Tirexs.HTTP.post("/music/_search", query)
+    {:ok, 200, %{aggregations: %{year_count: %{buckets: results}}}} = result
+
+    results
+    |> Enum.map(fn %{key: year, doc_count: count} -> %{year: year, count: count} end)
+    |> Enum.sort_by(&Map.fetch(&1, :year))
+  end
+
   def find_albums(search_string) do
     query = [
       index: "music",

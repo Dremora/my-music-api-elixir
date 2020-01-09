@@ -6,6 +6,11 @@ defmodule MyMusicWeb.Schema.Types do
   alias MyMusic.Library
   alias MyMusicWeb.Schema.Middleware
 
+  object :album_per_year_count do
+    field :year, non_null(:integer)
+    field :count, non_null(:integer)
+  end
+
   object :album do
     field :id, non_null(:binary_id)
     field :title, non_null(:string)
