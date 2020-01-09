@@ -38,7 +38,7 @@ defmodule MyMusic.Mixfile do
       {:postgrex, ">= 0.13.5"},
       {:cowboy, "~> 1.0"},
       {:cors_plug, "~> 1.5.2"},
-      {:credo, "~> 0.9.0", only: [:dev, :test]},
+      {:credo, "~> 1.1.5", only: [:dev, :test]},
       {:absinthe, "~> 1.4.9"},
       {:absinthe_plug, "~> 1.4.2"},
       {:dataloader, "~> 1.0.1"},
