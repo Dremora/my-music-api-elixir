@@ -16,10 +16,13 @@ defmodule Main do
               "search_analyzer" => "folding",
               "type" => "string"
             },
-            "year" => %{
+            "year_search" => %{
               "analyzer" => "autocomplete",
               "search_analyzer" => "folding",
               "type" => "string"
+            },
+            "year" => %{
+              "type" => "integer"
             }
           }
         }

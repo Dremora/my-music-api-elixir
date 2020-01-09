@@ -32,7 +32,7 @@ defmodule MyMusic.Library do
         query: [
           multi_match: [
             query: search_string,
-            fields: ["artist", "title", "year"],
+            fields: ["artist", "title", "year_search"],
             lenient: true,
             type: "cross_fields",
             operator: "and"
@@ -59,7 +59,8 @@ defmodule MyMusic.Library do
               id: album.id,
               artist: album.artist,
               title: album.title,
-              year: album.year
+              year: album.year,
+              year_search: album.year
             ]
           ])
         end
