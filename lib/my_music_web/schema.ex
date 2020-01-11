@@ -22,13 +22,13 @@ defmodule MyMusicWeb.Schema do
   import_types MyMusicWeb.Schema.Types
 
   query do
-    field :albums, list_of(non_null(:album)) do
+    field :albums, non_null(list_of(non_null(:album))) do
       arg :query, non_null(:string)
 
       resolve &Resolvers.Library.find_albums/3
     end
 
-    field :album, :album do
+    field :album, non_null(:album) do
       arg :id, non_null(:binary_id)
 
       resolve &Resolvers.Library.get_album/3
@@ -40,13 +40,13 @@ defmodule MyMusicWeb.Schema do
   end
 
   mutation do
-    field :login, type: :boolean do
+    field :login, type: non_null(:boolean) do
       arg :password, non_null(:string)
 
       resolve &MyMusicWeb.Resolvers.Account.login/2
     end
 
-    field :create_album, type: :album do
+    field :create_album, type: non_null(:album) do
       arg :title, non_null(:string)
       arg :artist, non_null(:string)
       arg :comments, :string
@@ -58,7 +58,7 @@ defmodule MyMusicWeb.Schema do
       resolve &MyMusicWeb.Resolvers.Library.create_album/2
     end
 
-    field :update_album, type: :album do
+    field :update_album, type: non_null(:album) do
       arg :id, non_null(:binary_id)
       arg :title, non_null(:string)
       arg :artist, non_null(:string)
