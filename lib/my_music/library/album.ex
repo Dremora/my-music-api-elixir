@@ -47,7 +47,7 @@ defmodule MyMusic.Library.Album do
             |> validate_length(:first_played_date, min: 1, max: 3)
 
           is_map(attrs.first_played) && Map.has_key?(attrs.first_played, :timestamp) ->
-            date = DateTime.from_unix!(attrs.first_played.timestamp, :millisecond)
+            date = DateTime.from_unix!(attrs.first_played.timestamp)
 
             changes
             |> put_change(:first_played_date, nil)

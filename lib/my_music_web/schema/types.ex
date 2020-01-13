@@ -22,7 +22,7 @@ defmodule MyMusicWeb.Schema.Types do
       resolve fn album, _args, _info ->
         cond do
           album.first_played_timestamp ->
-            {:ok, %{timestamp: DateTime.to_unix(album.first_played_timestamp, :millisecond)}}
+            {:ok, %{timestamp: DateTime.to_unix(album.first_played_timestamp)}}
 
           album.first_played_date ->
             {:ok,
