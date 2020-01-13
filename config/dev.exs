@@ -39,7 +39,6 @@ config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
 config :my_music, MyMusic.Repo,
-  adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
   database: "my_music_dev",

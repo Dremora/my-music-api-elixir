@@ -1,4 +1,4 @@
-FROM elixir:1.6.4
+FROM elixir:1.9.4
 
 ADD . /app
 WORKDIR /app

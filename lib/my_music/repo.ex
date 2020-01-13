@@ -1,5 +1,5 @@
 defmodule MyMusic.Repo do
-  use Ecto.Repo, otp_app: :my_music
+  use Ecto.Repo, otp_app: :my_music, adapter: Ecto.Adapters.Postgres
 
   @doc """
   Dynamically loads the repository url from the

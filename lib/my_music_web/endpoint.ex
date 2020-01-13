@@ -14,7 +14,7 @@ defmodule MyMusicWeb.Endpoint do
   plug Plug.Parsers,
     parsers: [:json],
     pass: ["*/*"],
-    json_decoder: Poison
+    json_decoder: Phoenix.json_library()
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.

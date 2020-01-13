@@ -33,15 +33,17 @@ defmodule MyMusic.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.3.2"},
-      {:phoenix_ecto, "~> 3.3.0"},
-      {:postgrex, ">= 0.13.5"},
-      {:cowboy, "~> 1.0"},
-      {:cors_plug, "~> 1.5.2"},
+      {:phoenix, "~> 1.4.11"},
+      {:phoenix_ecto, "~> 4.1.0"},
+      {:postgrex, ">= 0.15.3"},
+      {:ecto_sql, "~> 3.3.2"},
+      {:plug_cowboy, "~> 2.1.1"},
+      {:cors_plug, "~> 2.0.0"},
+      {:jason, "~> 1.1.2"},
       {:credo, "~> 1.1.5", only: [:dev, :test]},
-      {:absinthe, "~> 1.4.9"},
-      {:absinthe_plug, "~> 1.4.2"},
-      {:dataloader, "~> 1.0.1"},
+      {:absinthe, "~> 1.4.16"},
+      {:absinthe_plug, "~> 1.4.7"},
+      {:dataloader, "~> 1.0.7"},
       {:tirexs, "~> 0.8.15"}
     ]
   end
