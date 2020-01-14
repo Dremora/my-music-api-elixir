@@ -44,6 +44,30 @@ defmodule MyMusic.Library do
     |> Enum.sort_by(&Map.fetch(&1, :year))
   end
 
+  def find_album_per_first_played_year_count do
+    query = [
+      size: 0,
+      aggs: [
+        first_played_year_count: [
+          date_histogram: [
+            field: "first_played",
+            calendar_interval: "year",
+            format: "yyyy",
+            missing: "2005"
+          ]
+        ]
+      ]
+    ]
+
+    {:ok, 200, %{aggregations: %{first_played_year_count: %{buckets: results}}}} = Tirexs.HTTP.post("/music/_search", query)
+
+    IO.inspect(results)
+
+    results
+    |> Enum.map(fn %{key_as_string: year, doc_count: count} -> %{year: elem(Integer.parse(year), 0), count: count} end)
+    |> Enum.sort_by(&Map.fetch(&1, :year))
+  end
+
   def find_albums(search_string) do
     query = [
       index: "music",

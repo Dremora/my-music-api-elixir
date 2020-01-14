@@ -9,6 +9,10 @@ defmodule MyMusicWeb.Resolvers.Library do
     {:ok, Library.find_album_per_year_count}
   end
 
+  def find_album_per_first_played_year_count(_parent, _query, _info) do
+    {:ok, Library.find_album_per_first_played_year_count}
+  end
+
   def get_album(_parent, %{id: id}, _info) do
     case Library.get_album(id) do
       nil -> {:error, "Album id #{id} not found"}

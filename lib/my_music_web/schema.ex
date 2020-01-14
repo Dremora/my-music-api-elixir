@@ -37,6 +37,10 @@ defmodule MyMusicWeb.Schema do
     field :album_per_year_count, non_null(list_of(non_null(:album_per_year_count))) do
       resolve &Resolvers.Library.find_album_per_year_count/3
     end
+
+    field :album_per_first_played_year_count, non_null(list_of(non_null(:album_per_year_count))) do
+      resolve &Resolvers.Library.find_album_per_first_played_year_count/3
+    end
   end
 
   mutation do

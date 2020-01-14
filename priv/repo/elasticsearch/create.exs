@@ -24,6 +24,10 @@ defmodule Main do
                 "type" => "text"
               }
             }
+          },
+          "first_played" => %{
+            "type" => "date",
+            "format" => "yyyy-M-d||yyyy-M||yyyy||epoch_second"
           }
         }
       },
