@@ -47,14 +47,13 @@ defmodule MyMusic.Library do
   def find_albums(search_string) do
     query = [
       index: "music",
-      type: "album",
       search: [
         from: 0,
         size: 50,
         query: [
           multi_match: [
             query: search_string,
-            fields: ["artist", "title", "year_search"],
+            fields: ["artist", "title", "year.search"],
             lenient: true,
             type: "cross_fields",
             operator: "and"
@@ -75,14 +74,13 @@ defmodule MyMusic.Library do
   defp index_album(album) do
     with {:ok, album} <- album do
       payload =
-        bulk(index: "music", type: "album") do
+        bulk(index: "music") do
           index([
             [
               id: album.id,
               artist: album.artist,
               title: album.title,
-              year: album.year,
-              year_search: album.year
+              year: album.year
             ]
           ])
         end
@@ -127,7 +125,7 @@ defmodule MyMusic.Library do
         result = Repo.delete(album)
 
         payload =
-          bulk(index: "music", type: "album") do
+          bulk(index: "music") do
             delete([
               [
                 id: album.id

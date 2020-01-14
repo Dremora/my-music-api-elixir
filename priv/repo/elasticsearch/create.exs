@@ -4,25 +4,25 @@ defmodule Main do
   def main do
     put!("/music", %{
       "mappings" => %{
-        "album" => %{
-          "properties" => %{
-            "artist" => %{
-              "analyzer" => "autocomplete",
-              "search_analyzer" => "folding",
-              "type" => "string"
-            },
-            "title" => %{
-              "analyzer" => "autocomplete",
-              "search_analyzer" => "folding",
-              "type" => "string"
-            },
-            "year_search" => %{
-              "analyzer" => "autocomplete",
-              "search_analyzer" => "folding",
-              "type" => "string"
-            },
-            "year" => %{
-              "type" => "integer"
+        "properties" => %{
+          "artist" => %{
+            "analyzer" => "autocomplete",
+            "search_analyzer" => "folding",
+            "type" => "text"
+          },
+          "title" => %{
+            "analyzer" => "autocomplete",
+            "search_analyzer" => "folding",
+            "type" => "text"
+          },
+          "year" => %{
+            "type" => "integer",
+            "fields" => %{
+              "search" => %{
+                "analyzer" => "autocomplete",
+                "search_analyzer" => "folding",
+                "type" => "text"
+              }
             }
           }
         }

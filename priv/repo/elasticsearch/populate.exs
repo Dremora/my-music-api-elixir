@@ -14,7 +14,7 @@ defmodule Main do
       end)
 
     payload =
-      bulk(index: "music", type: "album") do
+      bulk(index: "music") do
         index(commands)
       end
 
