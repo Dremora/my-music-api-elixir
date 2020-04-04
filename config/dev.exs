@@ -39,11 +39,16 @@ config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
 config :my_music, MyMusic.Repo,
+  # username: "my_music_user",
+  # password: "U4iFDvbf4ZR2ycTW5S6STXsuKahpo7od",
+  # database: "my_music",
+  # hostname: "postgres.render.com",
+  # ssl: true,
   username: "postgres",
   password: "postgres",
   database: "my_music_dev",
   hostname: "localhost",
-  pool_size: 10
+  pool_size: 1
 
 # Elasticsearch
 config :tirexs, :uri, "http://elastic:changeme@localhost:9200"
