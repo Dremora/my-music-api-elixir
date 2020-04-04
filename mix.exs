@@ -39,7 +39,7 @@ defmodule MyMusic.Mixfile do
       {:ecto_sql, "~> 3.3.2"},
       {:plug_cowboy, "~> 2.1.1"},
       {:cors_plug, "~> 2.0.0"},
-      {:jason, "~> 1.1.2"},
+      {:jason, "~> 1.2.0"},
       {:credo, "~> 1.1.5", only: [:dev, :test]},
       {:absinthe, "~> 1.4.16"},
       {:absinthe_plug, "~> 1.4.7"},
