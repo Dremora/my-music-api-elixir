@@ -1,5 +1,6 @@
 [
   import_deps: [:absinthe, :plug],
+  inputs: ["mix.exs", "{config,lib,priv,test}/**/*.{ex,exs}"],
   locals_without_parens: [
     # Ecto
     add: 2,

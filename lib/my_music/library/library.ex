@@ -59,12 +59,15 @@ defmodule MyMusic.Library do
       ]
     ]
 
-    {:ok, 200, %{aggregations: %{first_played_year_count: %{buckets: results}}}} = Tirexs.HTTP.post("/music/_search", query)
+    {:ok, 200, %{aggregations: %{first_played_year_count: %{buckets: results}}}} =
+      Tirexs.HTTP.post("/music/_search", query)
 
     IO.inspect(results)
 
     results
-    |> Enum.map(fn %{key_as_string: year, doc_count: count} -> %{year: elem(Integer.parse(year), 0), count: count} end)
+    |> Enum.map(fn %{key_as_string: year, doc_count: count} ->
+      %{year: elem(Integer.parse(year), 0), count: count}
+    end)
     |> Enum.sort_by(&Map.fetch(&1, :year))
   end
 
