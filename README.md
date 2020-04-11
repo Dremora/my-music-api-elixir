@@ -9,6 +9,7 @@ Install asdf and autoconf with brew:
 Install elixir and erlang:
 
 `export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"`
+
 `asdf install`
 
 Install dependencies:
