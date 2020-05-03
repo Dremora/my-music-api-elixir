@@ -33,7 +33,7 @@ defmodule MyMusic.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.11"},
+      {:phoenix, "~> 1.5.1"},
       {:phoenix_ecto, "~> 4.1.0"},
       {:postgrex, ">= 0.15.3"},
       {:ecto_sql, "~> 3.4.2"},
