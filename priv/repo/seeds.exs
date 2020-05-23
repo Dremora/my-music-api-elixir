@@ -8,7 +8,7 @@ defmodule Main do
   def main do
     changesets =
       File.read!("priv/repo/seeds.json")
-      |> Poison.Parser.parse!()
+      |> Jason.decode!()
       |> Map.get("rows")
       |> Enum.map(&Map.get(&1, "doc"))
       |> Enum.filter(&(Map.get(&1, "_id") != "_design/rest"))
