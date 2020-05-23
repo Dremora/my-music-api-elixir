@@ -12,6 +12,14 @@ Install elixir and erlang:
 
 `asdf install`
 
+Install hex:
+
+`mix local.hex --force`
+
+Install rebar:
+
+`mix local.rebar --force`
+
 Install dependencies:
 
 `mix deps.get`
