@@ -10,6 +10,8 @@ defmodule MyMusic.Application do
     children = [
       # Start the Ecto repository
       supervisor(MyMusic.Repo, []),
+      # Start the PubSub system
+      {Phoenix.PubSub, name: MyMusicWeb.PubSub},
       # Start the endpoint when the application starts
       supervisor(MyMusicWeb.Endpoint, [])
       # Start your own worker by calling: MyMusic.Worker.start_link(arg1, arg2, arg3)
