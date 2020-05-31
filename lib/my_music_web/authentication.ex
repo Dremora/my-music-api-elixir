@@ -1,5 +1,7 @@
 defmodule MyMusicWeb.Authentication do
+  alias MyMusicWeb.Endpoint
+
   def verify(password) do
-    password === MyMusicWeb.Endpoint.config(:user_password)
+    password === Endpoint.config(:user_password)
   end
 end

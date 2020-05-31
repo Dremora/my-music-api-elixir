@@ -42,7 +42,10 @@ defmodule MyMusic.Library.Source do
       :edition,
       :tag_issues
     ])
-    |> validate_inclusion(:location, ~w(apple-music spotify google-music foobar2000))
+    |> validate_inclusion(
+      :location,
+      ~w(apple-music spotify google-music foobar2000)
+    )
     |> validate_required([:location])
     |> validate_inclusion(:format, ~w(TAK MIXED MPC FLAC MP3 APE OFT WMA))
     |> validate_inclusion(:discs, 1..100)

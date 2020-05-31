@@ -1,13 +1,16 @@
 defmodule MyMusic.Library do
   import Ecto.{Query, Changeset}, warn: false
   import Tirexs.Bulk
-  alias MyMusic.Repo
 
+  alias Dataloader.Ecto
   alias MyMusic.Library.Album
   alias MyMusic.Library.Source
+  alias MyMusic.Repo
+  alias Tirexs.HTTP
+  alias Tirexs.Query
 
   def data do
-    Dataloader.Ecto.new(Repo, query: &query/2)
+    Ecto.new(Repo, query: &query/2)
   end
 
   def query(Source, _) do
@@ -36,7 +39,7 @@ defmodule MyMusic.Library do
       ]
     ]
 
-    result = Tirexs.HTTP.post("/music/_search", query)
+    result = HTTP.post("/music/_search", query)
     {:ok, 200, %{aggregations: %{year_count: %{buckets: results}}}} = result
 
     results
@@ -59,10 +62,11 @@ defmodule MyMusic.Library do
       ]
     ]
 
-    {:ok, 200, %{aggregations: %{first_played_year_count: %{buckets: results}}}} =
-      Tirexs.HTTP.post("/music/_search", query)
-
-    IO.inspect(results)
+    {
+      :ok,
+      200,
+      %{aggregations: %{first_played_year_count: %{buckets: results}}}
+    } = HTTP.post("/music/_search", query)
 
     results
     |> Enum.map(fn %{key_as_string: year, doc_count: count} ->
@@ -89,7 +93,12 @@ defmodule MyMusic.Library do
       ]
     ]
 
-    {:ok, 200, %{hits: %{hits: results}}} = Tirexs.Query.create_resource(query)
+    {
+      :ok,
+      200,
+      %{hits: %{hits: results}}
+    } = Query.create_resource(query)
+
     ids = Enum.map(results, & &1._id)
     Repo.all(from a in Album, where: a.id in ^ids)
   end

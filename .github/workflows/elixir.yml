@@ -20,3 +20,5 @@ jobs:
         run: mix deps.get
       - name: Run formatter
         run: mix format --check-formatted
+      - name: Run Credo
+        run: mix credo

@@ -1,4 +1,5 @@
 defmodule MyMusicWeb.Resolvers.Library do
+  alias Ecto.Changeset
   alias MyMusic.Library
 
   def find_albums(_parent, %{query: query}, _info) do
@@ -41,10 +42,8 @@ defmodule MyMusicWeb.Resolvers.Library do
   end
 
   def error_details(changeset) do
-    IO.inspect(changeset)
-
     changeset
-    |> Ecto.Changeset.traverse_errors(fn {msg, _} -> msg end)
+    |> Changeset.traverse_errors(fn {msg, _} -> msg end)
   end
 
   def delete_album(%{id: id}, _info) do

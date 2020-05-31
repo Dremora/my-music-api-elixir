@@ -137,17 +137,17 @@ defmodule MyMusicWeb.Schema.Types do
     serialize & &1
 
     parse fn value ->
-      regex = ~r/\A[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}\z/
+      r = ~r/\A[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}\z/
 
       case value do
         %Absinthe.Blueprint.Input.Null{} ->
           {:ok, nil}
 
         %Absinthe.Blueprint.Input.String{value: value} ->
-          with true <- String.match?(value, regex) do
+          if String.match?(value, r) do
             {:ok, value}
           else
-            _ -> :error
+            :error
           end
 
         _ ->

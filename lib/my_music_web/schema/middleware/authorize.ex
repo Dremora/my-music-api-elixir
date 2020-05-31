@@ -1,13 +1,16 @@
 defmodule MyMusicWeb.Schema.Middleware.Authorize do
+  alias Absinthe.Resolution
+
   @behaviour Absinthe.Middleware
 
   def call(resolution, _) do
-    with %{logged_in: true} <- resolution.context do
-      resolution
-    else
+    case resolution.context do
+      %{logged_in: true} ->
+        resolution
+
       _ ->
         resolution
-        |> Absinthe.Resolution.put_result({:error, "unauthorized"})
+        |> Resolution.put_result({:error, "unauthorized"})
     end
   end
 end

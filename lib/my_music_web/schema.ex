@@ -1,14 +1,17 @@
 defmodule MyMusicWeb.Schema do
   use Absinthe.Schema
 
+  alias Absinthe.Middleware.Dataloader, as: DataloaderMiddleware
+  alias Absinthe.Plugin
   alias MyMusicWeb.Resolvers
+  alias MyMusicWeb.Resolvers.Account
   alias MyMusicWeb.Schema.Middleware
 
   def plugins do
-    [Absinthe.Middleware.Dataloader | Absinthe.Plugin.defaults()]
+    [DataloaderMiddleware | Plugin.defaults()]
   end
 
-  def dataloader() do
+  def dataloader do
     alias MyMusic.Library
 
     Dataloader.new()
@@ -34,7 +37,8 @@ defmodule MyMusicWeb.Schema do
       resolve &Resolvers.Library.get_album/3
     end
 
-    field :album_per_year_count, non_null(list_of(non_null(:album_per_year_count))) do
+    field :album_per_year_count,
+          non_null(list_of(non_null(:album_per_year_count))) do
       resolve &Resolvers.Library.find_album_per_year_count/3
     end
 
@@ -48,7 +52,7 @@ defmodule MyMusicWeb.Schema do
     field :login, type: non_null(:boolean) do
       arg :password, non_null(:string)
 
-      resolve &MyMusicWeb.Resolvers.Account.login/2
+      resolve &Account.login/2
     end
 
     field :create_album, type: non_null(:album) do
