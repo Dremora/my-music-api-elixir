@@ -107,17 +107,33 @@ defmodule MyMusic.Library do
     Repo.get(Album, id)
   end
 
+  def index_first_played(album) do
+    case {album.first_played_date, album.first_played_timestamp} do
+      {[year], nil} -> "#{year}"
+      {[year, month], nil} -> "#{year}-#{month}"
+      {[year, month, day], nil} -> "#{year}-#{month}-#{day}"
+      {nil, %DateTime{} = timestamp} -> DateTime.to_unix(timestamp)
+      {nil, nil} -> nil
+      x -> raise "Unrecognized firstPlayed format: " <> inspect(x)
+    end
+  end
+
+  def to_elasticsearch(album) do
+    [
+      id: album.id,
+      artist: album.artist,
+      title: album.title,
+      year: album.year,
+      first_played: index_first_played(album)
+    ]
+  end
+
   defp index_album(album) do
     with {:ok, album} <- album do
       payload =
         bulk(index: "music") do
           index([
-            [
-              id: album.id,
-              artist: album.artist,
-              title: album.title,
-              year: album.year
-            ]
+            to_elasticsearch(album)
           ])
         end
 
