@@ -22,7 +22,21 @@ jobs:
           otp-version: ${{env.OTP_VERSION}}
       - name: Install Dependencies
         run: mix deps.get
+      - uses: actions/cache@v2
+        with:
+          path: build
+          key: build-${{ env.OTP_VERSION }}-${{ env.ELIXIR_VERSION }}-${{ hashFiles('mix.lock') }}
+          restore-keys: |
+            build-${{ env.OTP_VERSION }}-${{ env.ELIXIR_VERSION }}-
       - name: Run formatter
         run: mix format --check-formatted
       - name: Run Credo
         run: mix credo
+      - uses: actions/cache@v2
+        with:
+          path: _build/dev/dialyzer_erlang-${{env.OTP_VERSION}}_elixir-${{env.ELIXIR_VERSION}}_deps-dev.plt
+          key: dialyzer-${{ env.OTP_VERSION }}-${{ env.ELIXIR_VERSION }}-${{ hashFiles('mix.lock') }}
+          restore-keys: |
+            dialyzer-${{ env.OTP_VERSION }}-${{ env.ELIXIR_VERSION }}-
+      - name: Run dialyzer
+        run: mix dialyzer
