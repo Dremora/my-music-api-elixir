@@ -26,7 +26,7 @@ defmodule MyMusic.Library.Album do
         changes
         |> put_change(:first_played_timestamp, nil)
         |> cast(%{first_played_date: attrs["first_played"]}, [:first_played_date])
-        |> validate_length(:first_played_date, min: 1, max: 3)
+        |> validate_length(:first_played_date, is: 3)
 
       is_integer(attrs["first_played"]) ->
         date = DateTime.from_unix!(attrs["first_played"], :millisecond)
@@ -58,7 +58,7 @@ defmodule MyMusic.Library.Album do
         changes
         |> put_change(:first_played_timestamp, nil)
         |> cast(%{first_played_date: date}, [:first_played_date])
-        |> validate_length(:first_played_date, min: 1, max: 3)
+        |> validate_length(:first_played_date, is: 3)
 
       is_map(attrs.first_played) &&
           Map.has_key?(attrs.first_played, :timestamp) ->

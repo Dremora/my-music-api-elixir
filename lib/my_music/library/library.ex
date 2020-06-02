@@ -109,8 +109,8 @@ defmodule MyMusic.Library do
 
   def index_first_played(album) do
     case {album.first_played_date, album.first_played_timestamp} do
-      {[year], nil} -> "#{year}"
-      {[year, month], nil} -> "#{year}-#{month}"
+      {[year, nil, nil], nil} -> "#{year}"
+      {[year, month, nil], nil} -> "#{year}-#{month}"
       {[year, month, day], nil} -> "#{year}-#{month}-#{day}"
       {nil, %DateTime{} = timestamp} -> DateTime.to_unix(timestamp)
       {nil, nil} -> nil
