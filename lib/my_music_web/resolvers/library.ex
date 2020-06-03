@@ -2,8 +2,8 @@ defmodule MyMusicWeb.Resolvers.Library do
   alias Ecto.Changeset
   alias MyMusic.Library
 
-  def find_albums(_parent, %{query: query}, _info) do
-    {:ok, Library.find_albums(query)}
+  def find_albums(_parent, %{filter: filter}, _info) do
+    {:ok, Library.find_albums(filter)}
   end
 
   def find_album_per_year_count(_parent, _query, _info) do

@@ -81,6 +81,10 @@ defmodule MyMusicWeb.Schema.Types do
     end
   end
 
+  input_object :album_filter_input do
+    field :query, :string
+  end
+
   input_object :first_played_input do
     field :year, :integer
     field :month, :integer

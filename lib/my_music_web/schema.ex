@@ -26,7 +26,7 @@ defmodule MyMusicWeb.Schema do
 
   query do
     field :albums, non_null(list_of(non_null(:album))) do
-      arg :query, non_null(:string)
+      arg :filter, non_null(:album_filter_input)
 
       resolve &Resolvers.Library.find_albums/3
     end

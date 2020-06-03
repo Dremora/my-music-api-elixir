@@ -75,7 +75,7 @@ defmodule MyMusic.Library do
     |> Enum.sort_by(&Map.fetch(&1, :year))
   end
 
-  def find_albums(search_string) do
+  def find_albums(%{query: query}) do
     query = [
       index: "music",
       search: [
@@ -83,7 +83,7 @@ defmodule MyMusic.Library do
         size: 50,
         query: [
           multi_match: [
-            query: search_string,
+            query: query,
             fields: ["artist", "title", "year.search"],
             lenient: true,
             type: "cross_fields",
@@ -100,6 +100,10 @@ defmodule MyMusic.Library do
     } = Query.create_resource(query)
 
     ids = Enum.map(results, & &1._id)
+    get_albums_by_ids(ids)
+  end
+
+  def get_albums_by_ids(ids) do
     Repo.all(from a in Album, where: a.id in ^ids)
   end
 
