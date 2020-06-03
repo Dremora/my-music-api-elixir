@@ -8,12 +8,22 @@ defmodule Main do
           "artist" => %{
             "analyzer" => "autocomplete",
             "search_analyzer" => "folding",
-            "type" => "text"
+            "type" => "text",
+            "fields" => %{
+              "keyword" => %{
+                "type" => "keyword"
+              }
+            }
           },
           "title" => %{
             "analyzer" => "autocomplete",
             "search_analyzer" => "folding",
-            "type" => "text"
+            "type" => "text",
+            "fields" => %{
+              "keyword" => %{
+                "type" => "keyword"
+              }
+            }
           },
           "year" => %{
             "type" => "integer",

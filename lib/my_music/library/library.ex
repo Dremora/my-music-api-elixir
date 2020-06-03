@@ -103,9 +103,39 @@ defmodule MyMusic.Library do
     get_albums_by_ids(ids)
   end
 
+  def find_albums(%{year: year}) do
+    query = [
+      index: "music",
+      search: [
+        from: 0,
+        size: 10_000,
+        query: [
+          term: [
+            year: [
+              value: year
+            ]
+          ]
+        ],
+        sort: [
+          "artist.keyword": "asc",
+          "title.keyword": "asc"
+        ]
+      ]
+    ]
+
+    {
+      :ok,
+      200,
+      %{hits: %{hits: results}}
+    } = Query.create_resource(query)
+
+    ids = Enum.map(results, & &1._id)
+    get_albums_by_ids(ids)
+  end
+
   def get_albums_by_ids(ids) do
     albums =
-    Repo.all(from a in Album, where: a.id in ^ids)
+      Repo.all(from a in Album, where: a.id in ^ids)
       |> Map.new(fn album -> {album.id, album} end)
 
     Enum.map(ids, fn id -> Map.get(albums, id) end)
