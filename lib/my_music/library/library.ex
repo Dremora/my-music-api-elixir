@@ -104,7 +104,11 @@ defmodule MyMusic.Library do
   end
 
   def get_albums_by_ids(ids) do
+    albums =
     Repo.all(from a in Album, where: a.id in ^ids)
+      |> Map.new(fn album -> {album.id, album} end)
+
+    Enum.map(ids, fn id -> Map.get(albums, id) end)
   end
 
   def get_album(id) do
