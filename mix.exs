@@ -44,7 +44,8 @@ defmodule MyMusic.Mixfile do
       {:absinthe, "~> 1.4.16"},
       {:absinthe_plug, "~> 1.4.7"},
       {:dataloader, "~> 1.0.7"},
-      {:tirexs, "~> 0.8.15"}
+      {:tirexs, "~> 0.8.15"},
+      {:dialyxir, "~> 1.0", only: [:dev], runtime: false}
     ]
   end
 
