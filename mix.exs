@@ -34,7 +34,7 @@ defmodule MyMusic.Mixfile do
   defp deps do
     [
       {:phoenix, "~> 1.5.3"},
-      {:phoenix_ecto, "~> 4.1.0"},
+      {:phoenix_ecto, "~> 4.3.0"},
       {:postgrex, ">= 0.15.3"},
       {:ecto_sql, "~> 3.4.2"},
       {:plug_cowboy, "~> 2.3.0"},
